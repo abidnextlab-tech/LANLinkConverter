@@ -1,6 +1,6 @@
 markdown_content = """
 <div align="center">
-  <img src="assets/icon.png" alt="LAN Link Converter Logo" width="120" />
+  <img src="assets/icon.ico" alt="LAN Link Converter Logo" width="120" />
 
   <h1>LAN Link Converter</h1>
   <p><strong>Sleek Cross-Platform Bridge Utility to Convert and Manage LAN Link Protocols</strong></p>
