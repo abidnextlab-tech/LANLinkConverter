@@ -41,3 +41,10 @@ If you want to run the project locally, modify the UI, or contribute to the sour
 * **Git**
 
 ### 1. Clone the repository
+### 1. Clone the repository
+Code output
+README.md created successfully
+
+```bash
+git clone [https://github.com/abidnextlab-tech/LANLinkConverter.git](https://github.com/abidnextlab-tech/LANLinkConverter.git)
+cd LANLinkConverter
