@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>My Google AI Studio App</title>
+    <script>
+      // Safe write proxy/shield for environment-guarded window.fetch getter in sandbox iframes
+      (function() {
+        try {
+          var originalFetch = window.fetch;
+          var currentFetch = originalFetch;
+          Object.defineProperty(window, 'fetch', {
+            configurable: true,
+            enumerable: true,
+            get: function() {
+              return currentFetch;
+            },
+            set: function(val) {
+              currentFetch = val;
+            }
+          });
+        } catch (e) {
+          // Fallback to proto override if possible
+          try {
+            var proto = Object.getPrototypeOf(window);
+            if (proto && Object.getOwnPropertyDescriptor(proto, 'fetch')) {
+              var descriptor = Object.getOwnPropertyDescriptor(proto, 'fetch');
+              if (descriptor.configurable) {
+                Object.defineProperty(proto, 'fetch', {
+                  configurable: true,
+                  get: function() { return currentFetch; },
+                  set: function(val) { currentFetch = val; }
+                });
+              }
+            }
+          } catch (innerError) {
+            console.warn("Safe window.fetch shield inactive:", innerError);
+          }
+        }
+      })();
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
+

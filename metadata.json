@@ -1,0 +1,6 @@
+{
+  "name": "LAN Link Converter",
+  "description": "Convert shared Windows and macOS network LAN links back and forth automatically for easy cross-platform file sharing.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
