@@ -1,7 +1,9 @@
 {
-  "name": "react-example",
+  "name": "lan-link-converter",
+  "version": "2.4.0",
+  "author": "Abid Azmain <abid662016@gmail.com>",
+  "description": "A cross-platform bridge utility to convert and manage LAN link protocols.",
   "private": true,
-  "version": "0.0.0",
   "type": "module",
   "main": "electron/main.cjs",
   "scripts": {
@@ -29,11 +31,39 @@
     "autoprefixer": "^10.4.21",
     "electron": "^42.2.0",
     "electron-builder": "^26.8.1",
-    "electron-packager": "^17.1.2",
     "esbuild": "^0.25.0",
     "tailwindcss": "^4.1.14",
     "tsx": "^4.21.0",
-    "typescript": "~5.8.2",
-    "vite": "^6.2.3"
+    "typescript": "~5.8.2"
+  },
+  "build": {
+    "appId": "com.lan.converter",
+    "productName": "LAN Link Converter",
+    "copyright": "Copyright © 2026 Abid Azmain",
+    "directories": {
+      "buildResources": "assets",
+      "output": "release-output"
+    },
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": ["x64"]
+        }
+      ],
+      "icon": "assets/icon.ico",
+      "forceCodeSigning": false
+    },
+    "mac": {
+      "target": ["dmg"],
+      "icon": "assets/icon.icns",
+      "category": "public.app-category.utilities"
+    },
+    "nsis": {
+      "oneClick": false,
+      "perMachine": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true
+    }
   }
 }
