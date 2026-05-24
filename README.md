@@ -1,4 +1,3 @@
-markdown_content = """
 <div align="center">
   <img src="assets/icon.ico" alt="LAN Link Converter Logo" width="120" />
 
