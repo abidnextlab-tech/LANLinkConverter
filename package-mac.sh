@@ -13,43 +13,27 @@ NC='\033[0m'
 echo -e "${BLUE}${BOLD}--- Starting Fresh Build ---${NC}"
 
 # 1. Clean up old build artifacts
-rm -rf node_modules build-temp release-output dist
+rm -rf node_modules release-output dist
 
 # 2. Setup
 echo -e "${BLUE}[1/4] Installing dependencies...${NC}"
 npm install --legacy-peer-deps
-npm install electron electron-builder --save-dev
 
 # 3. Build Web
 echo -e "${BLUE}[2/4] Building Vite...${NC}"
 npm run build || exit 1
 
-# 4. Prepare Electron
-mkdir -p build-temp
-cp -R dist build-temp/dist
-cp -R electron build-temp/electron
-cat <<EOT > build-temp/package.json
-{
-  "name": "lan-link-converter",
-  "productName": "LAN Link Converter",
-  "version": "2.4.0",
-  "main": "electron/main.cjs",
-  "private": true
-}
-EOT
-
-# 5. Build Native App
+# 4. Build Native App
 echo -e "${BLUE}[3/4] Packaging native App...${NC}"
-npx electron-builder build \
-    --mac --dir \
-    --config.directories.output=release-output \
-    --config.directories.app=build-temp \
-    --config.productName="LAN Link Converter"
+# This command automatically reads the "build" block in your package.json
+npx electron-builder --mac || { echo -e "${RED}Packaging failed!${NC}"; exit 1; }
 
-# 6. Fix Security Flag
+# 5. Fix Security Flag
+# Electron-builder typically places the app in release-output/mac or mac-arm64
 APP_PATH=$(find ./release-output -name "*.app" -type d | head -n 1)
+
 if [ -z "$APP_PATH" ]; then
-    echo -e "${RED}Build failed to locate .app bundle.${NC}"
+    echo -e "${RED}Build failed: .app bundle not found in release-output.${NC}"
     exit 1
 fi
 
